@@ -1,0 +1,34 @@
+services:
+  webserver:
+    image: webhippie/php-nginx:latest
+    container_name: php-nginx
+    restart: always
+    volumes:
+      - ./app:/srv/www/
+    ports:
+      - '3000:8080'
+    links:
+      - database
+
+  database:
+    platform: linux/x86_64
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - '3306:3306'
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: nutriaapp
+      MYSQL_DATABASE: nutriaapp
+
+  database_admin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - '8080:80'
+    environment:
+      MYSQL_ROOT_PASSWORD: nutriaapp
+      PMA_HOST: database
+    depends_on:
+      - database
