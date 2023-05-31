@@ -1,6 +1,6 @@
 <?php
 
-$userController = new UserController();
+$UserController = new UserController();
 
 $router = new Router(new Request());
 
@@ -8,7 +8,7 @@ $router->get('/', function() {
   echo "GET DEU BOM";
 });
 
-$router->get('/users', [$userController, 'index']);
+$router->get('/users', [$UserController, 'getAllUsers']);
 
 $router->get('/users/update/:id', function() {
   echo "UPDATING USERS";

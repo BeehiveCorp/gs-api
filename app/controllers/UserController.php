@@ -1,10 +1,18 @@
 <?php
 
 class UserController {
-  public function index($request) {
+  private $User;
+
+  function __construct() {
+    $this->User = new UserModel();
+  }
+
+  public function getAllUsers($request) {
     $body = $request->body;
     $params = $request->params;
 
-    return json_encode($params);
+    $allUsers = $this->User::all();
+
+    echo $allUsers;
   }
 }
