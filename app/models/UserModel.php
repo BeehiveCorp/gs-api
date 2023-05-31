@@ -1,7 +1,19 @@
 <?php
 
 class UserModel {
+  static private $pdoConn = null;
+  static private $table = "USERS";
+
+  function __construct(Database $database) {
+    self::$pdoConn = $database->getConnection();
+  }
+
   static function all() {
-    return "all users";
+    $sql = 'SELECT * FROM ' . self::$table;
+    $stmt = self::$pdoConn->prepare($sql);
+    
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }
