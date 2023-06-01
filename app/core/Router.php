@@ -14,7 +14,6 @@ class Router {
     $this->routes[strtoupper($routeHttpMethod)][$route] = $callback;
   }
 
-
   private function resolve() {
     $requestHttpMethod = $this->request->httpMethod;
     $requestFormattedUri = $this->request->uri;
