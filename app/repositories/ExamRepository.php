@@ -1,8 +1,8 @@
 <?php
 
-class StoreModel {
+class ExamRepository {
   static private $pdoConn = null;
-  static private $table = "STORES";
+  static private $table = "EXAMS";
 
   function __construct(Database $database) {
     self::$pdoConn = $database->getConnection();

@@ -1,6 +1,6 @@
 <?php
 
-class NutrientModel {
+class NutrientRepository {
   static private $pdoConn = null;
   static private $table = "NUTRIENTS";
 

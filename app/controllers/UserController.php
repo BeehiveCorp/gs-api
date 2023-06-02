@@ -1,37 +1,45 @@
 <?php
 
 class UserController {
-  private $User;
+  private $UserRepository;
+  private $PregnancyRepository;
 
   function __construct() {
     $database = new Database("database", "nutriaapp", "root", "nutriaapp");
-    $this->User = new UserModel($database);
+    $connection = $database->getConnection();
+
+    $this->UserRepository = new UserRepository($connection);
+    $this->PregnancyRepository = new PregnancyRepository($connection);
   }
 
-  public function getAllUsers($request) {
+  public function getAll() {
+    $all = $this->UserRepository::all();
+    ResponseHandler::success(200, $all);
+  }
+
+  public function create(Request $request) {
     $body = $request->body;
-    $params = $request->params;
 
-    $allUsers = $this->User::all();
+    $user = new UserModel($body);
 
-    return json_encode($allUsers);
-  }
-}
+    $isEmailInUse = $this->UserRepository::findOneBy('email', $user->getEmail());
 
-class DepedentController {
-  private $User;
+    if ($isEmailInUse) ResponseHandler::error(400, "Endereço de e-mail em uso.");
 
-  function __construct() {
-    $database = new Database("database", "nutriaapp", "root", "nutriaapp");
-    $this->User = new DependentsModel($database);
-  }
+    $wasInserted = $this->UserRepository::insert($user);
 
-  public function getAllUsers($request) {
-    $body = $request->body;
-    $params = $request->params;
+    if (!$wasInserted) ResponseHandler::error(422, "Algo deu errado.");
 
-    $allUsers = $this->User::all();
+    if ($body->is_pregnant) {
+      $insertedUser = $this->UserRepository::findOneBy('email', $user->getEmail());
+  
+      $pregnancy = new PregnancyModel(null, $body->weeks, $body->risk_pregnant, $insertedUser);
 
-    return json_encode($allUsers);
+      $wasPregnancyInserted = $this->PregnancyRepository::insert($pregnancy);
+
+      if (!$wasPregnancyInserted) ResponseHandler::error(422, "Algo deu errado.");
+    }
+
+    ResponseHandler::success(201);
   }
 }

@@ -1,8 +1,8 @@
 <?php
 
-class EconomicEstablishmentModel {
+class ExamNutrientRepository {
   static private $pdoConn = null;
-  static private $table = "ECONOMIC_ESTABLISHMENTS";
+  static private $table = "EXAM_NUTRIENTS";
 
   function __construct(Database $database) {
     self::$pdoConn = $database->getConnection();

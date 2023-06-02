@@ -1,8 +1,8 @@
 <?php
 
-class ProductModel {
+class DependentRepository {
   static private $pdoConn = null;
-  static private $table = "PRODUCTS";
+  static private $table = "DEPENDENTS";
 
   function __construct(Database $database) {
     self::$pdoConn = $database->getConnection();

@@ -1,19 +1,39 @@
 <?php
 
 class PregnancyModel {
-  static private $pdoConn = null;
-  static private $table = "PREGNANCIES";
+  private $id;
+  private $weeks;
+  private $riskPregnant;
+  private $user;
 
-  function __construct(Database $database) {
-    self::$pdoConn = $database->getConnection();
+  function __construct(?string $id, int $weeks, bool $riskPregnant, UserModel $user) {
+    $this->id = $id;
+    $this->weeks = $weeks;
+    $this->riskPregnant = $riskPregnant;
+    $this->user = $user;
   }
 
-  static function all() {
-    $sql = 'SELECT * FROM ' . self::$table;
-    $stmt = self::$pdoConn->prepare($sql);
-    
-    $stmt->execute();
+  public function getId() {
+    return $this->id;
+  }
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  public function getWeeks() {
+    return $this->weeks;
+  }
+
+  public function isRiskPregnant() {
+    return $this->riskPregnant ? 1 : 0;
+  }
+
+  public function getUser() {
+    return $this->user;
+  }
+
+  public function getJsonSerialized() {
+    return [
+      'weeks' => $this->weeks,
+      'risk-pregnant' => $this->riskPregnant,
+      'user' => $this->user->getJsonSerialized()
+    ];
   }
 }
