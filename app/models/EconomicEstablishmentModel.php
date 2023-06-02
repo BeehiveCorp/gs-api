@@ -1,8 +1,8 @@
 <?php
 
-class Productcategory_nutrientsModel {
+class EconomicEstablishmentModel {
   static private $pdoConn = null;
-  static private $table = "PRODUCT_CATEGORY_NUTRIENTS";
+  static private $table = "ECONOMIC_ESTABLISHMENTS";
 
   function __construct(Database $database) {
     self::$pdoConn = $database->getConnection();

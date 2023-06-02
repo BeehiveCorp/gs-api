@@ -1,8 +1,8 @@
 <?php
 
-class DependentsModel {
+class DependentModel {
   static private $pdoConn = null;
-  static private $table = "DEPENDENT";
+  static private $table = "DEPENDENTS";
 
   function __construct(Database $database) {
     self::$pdoConn = $database->getConnection();
