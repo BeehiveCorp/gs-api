@@ -8,7 +8,7 @@ require_once "./core/Request.php";
 require_once "./core/Router.php";
 
 // Utilities
-require_once "./utils/ResponseErrorHandler.php";
+require_once "./utils/ResponseHandler.php";
 
 // Main
 require_once "./models/index.php";
