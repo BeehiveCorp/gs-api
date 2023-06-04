@@ -4,8 +4,9 @@ class DependentRepository {
   static private $pdoConn = null;
   static private $table = "DEPENDENTS";
 
-  function __construct(Database $database) {
-    self::$pdoConn = $database->getConnection();
+  
+  function __construct(PDO $connection) {
+    self::$pdoConn = $connection;
   }
 
   static function all() {
