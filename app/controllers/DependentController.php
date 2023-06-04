@@ -1,6 +1,6 @@
 <?php
 
-class DependentsController {
+class DependentController {
 
   private $DependentRepository;
 
