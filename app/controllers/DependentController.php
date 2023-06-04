@@ -17,21 +17,23 @@ class DependentController {
   }
   //crud
 
-  public function createDependent(Request $request){
+  public function updateDependent(Request $request, $id){
     $body = $request->body;
     $dependent = new DependentModel($body);
 
-    $nameExist = $this->DependentRepository::findOneBy('id', $dependent->getName());
+    $nameExist = $this->DependentRepository::findOneBy('name', $dependent->getName());
 
-    if ($nameExist) {
-      ResponseHandler::error(400, "Dependente já existe.");
+    if ($nameExist && $nameExist->getId() !== $id) {
+        ResponseHandler::error(400, "Dependente com o mesmo nome já existe.");
     }
 
-    $wasInserted = $this->DependentRepository::insert($dependent);
+    $wasUpdated = $this->DependentRepository::update($id, $dependent);
 
-    if (!$wasInserted) {
-        ResponseHandler::error(422, "Algo deu errado.");
+    if (!$wasUpdated) {
+        ResponseHandler::error(422, "Não foi possível atualizar o dependente.");
     }
-    ResponseHandler::success(201);
+    ResponseHandler::success(200);
 }
+
+
 }

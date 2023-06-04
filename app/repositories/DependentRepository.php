@@ -38,6 +38,7 @@ class DependentRepository {
 
   public static function findOneBy($column, $condition): ?DependentModel {
     $sql = 'SELECT * FROM ' . self::$table . ' WHERE ' . $column . ' = ' . "'{$condition}'";
+
     $stmt = self::$pdoConn->prepare($sql);
       
     $stmt->execute();
@@ -46,4 +47,20 @@ class DependentRepository {
     
     return $result ? new DependentModel($result) : null;
   }
+
+  public static function update($id, DependentModel $dependent) {
+    $name = $dependent->getName();
+    $birthDate = $dependent->getBirthDate();
+    $gender = $dependent->getGender();
+    $avatar = $dependent->getAvatar();
+    $height = $dependent->getHeight();
+    $weight = $dependent->getWeight();
+
+    $sql = "UPDATE dependentes SET name=?, birth_date=?, gender=?, avatar=?, height=?, weight=? WHERE id=?";
+    $stmt = self::$pdoConn->prepare($sql);
+    $stmt->execute([$name, $birthDate, $gender, $avatar, $height, $weight, $id]);
+
+    return $stmt->rowCount() > 0;
+}
+
 }
