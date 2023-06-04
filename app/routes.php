@@ -5,6 +5,7 @@ $router = new Router(new Request());
 // User routes
 $router->get('/users/all', [$UserController, 'getAll']);
 $router->post('/users/create', [$UserController, 'create']);
+$router->post('/users/login', [$UserController, 'login']);
 
 
 // $router->get('/dependents', [$DependentsController, 'getAll']);

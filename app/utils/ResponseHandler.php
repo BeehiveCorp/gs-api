@@ -15,13 +15,9 @@ class ResponseHandler {
   }
 
   public static function success($statusCode = 200, $data = null) {
-    $response = [
-        'data' => $data,
-    ];
-
     http_response_code($statusCode);
     header('Content-Type: application/json');
-    echo json_encode($response);
+    echo json_encode($data);
     exit;
   }
 }

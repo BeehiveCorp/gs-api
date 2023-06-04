@@ -42,4 +42,20 @@ class UserController {
 
     ResponseHandler::success(201);
   }
+
+  public function login(Request $request) {
+    $body = $request->body;
+
+    $email = $body->email;
+    $password = $body->password;
+
+    $queryCondition = 'email = ' . "'$email'" . 'AND' . ' password = ' . "'$password'";
+    $users = $this->UserRepository::where($queryCondition);
+
+    if (isset($users[0])) {
+      ResponseHandler::success(200, $users[0]);
+    }
+
+    ResponseHandler::error(404, "Usuário não encontrado");
+  }
 }
