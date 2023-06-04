@@ -1,7 +1,7 @@
 <?php
 
 require_once "./controllers/UserController.php";
-require_once "./controllers/DependentsController.php";
+require_once "./controllers/DependentController.php";
 
 $UserController = new UserController();
-$DependentsController = new DependentsController();
+$DependentController = new DependentController();

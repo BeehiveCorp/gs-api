@@ -8,7 +8,7 @@ $router->post('/users/create', [$UserController, 'create']);
 $router->post('/users/login', [$UserController, 'login']);
 
 
-$router->get('/dependents/all', [$DependentsController, 'getAll']);
+$router->get('/dependents/all', [$DependentController, 'getAll']);
 
 // $router->get('/pregnancies', [$PregnanciesController, 'getAll']);
 
