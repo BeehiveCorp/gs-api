@@ -63,4 +63,13 @@ class DependentRepository {
     return $stmt->rowCount() > 0;
 }
 
+public function delete($id) {
+  $sql = "DELETE FROM dependentes WHERE id = ?";
+  $stmt = self::$pdoConn->prepare($sql);
+  $stmt->execute([$id]);
+
+  return $stmt->rowCount() > 0;
+}
+
+
 }

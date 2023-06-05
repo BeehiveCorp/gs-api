@@ -35,5 +35,22 @@ class DependentController {
     ResponseHandler::success(200);
 }
 
+public function deleteDependent($id) {
+  $existingDependent = $this->DependentRepository->findById($id);
+
+  if (!$existingDependent) {
+      ResponseHandler::error(404, "Dependente não encontrado.");
+  }
+
+  $wasDeleted = $this->DependentRepository->delete($id);
+
+  if (!$wasDeleted) {
+      ResponseHandler::error(500, "Não foi possível excluir o dependente.");
+  }
+
+  ResponseHandler::success(200);
+}
+
+
 
 }
