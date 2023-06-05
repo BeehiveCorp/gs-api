@@ -58,4 +58,14 @@ class UserController {
 
     ResponseHandler::error(404, "Usuário não encontrado");
   }
+
+  public function checkUserExistence(Request $request) {
+    $params = $request->params;
+    $email = $params->email;
+
+    $user = $this->UserRepository::findOneBy('email', $email);
+
+    if ($user) ResponseHandler::success(200, $user->getJsonSerialized());
+    ResponseHandler::success(200);
+  }
 }
