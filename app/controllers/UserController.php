@@ -33,7 +33,7 @@ class UserController {
     if ($body->is_pregnant) {
       $insertedUser = $this->UserRepository::findOneBy('email', $user->getEmail());
   
-      $pregnancy = new PregnancyModel(null, $body->weeks, $body->risk_pregnant, $insertedUser);
+      $pregnancy = new PregnancyModel(null, $body->weeks, $body->risk_pregnancy, $insertedUser);
 
       $wasPregnancyInserted = $this->PregnancyRepository::insert($pregnancy);
 
@@ -61,6 +61,9 @@ class UserController {
 
   public function checkUserExistence(Request $request) {
     $params = $request->params;
+
+    if (!$params) ResponseHandler::error(400, 'Email não enviado na requisição');
+
     $email = $params->email;
 
     $user = $this->UserRepository::findOneBy('email', $email);

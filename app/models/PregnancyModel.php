@@ -3,13 +3,13 @@
 class PregnancyModel {
   private $id;
   private $weeks;
-  private $riskPregnant;
+  private $riskPregnancy;
   private $user;
 
-  function __construct(?string $id, int $weeks, bool $riskPregnant, UserModel $user) {
+  function __construct(?string $id, int $weeks, bool $riskPregnancy, UserModel $user) {
     $this->id = $id;
     $this->weeks = $weeks;
-    $this->riskPregnant = $riskPregnant;
+    $this->riskPregnancy = $riskPregnancy;
     $this->user = $user;
   }
 
@@ -21,8 +21,8 @@ class PregnancyModel {
     return $this->weeks;
   }
 
-  public function isRiskPregnant() {
-    return $this->riskPregnant ? 1 : 0;
+  public function isRiskPregnancy() {
+    return $this->riskPregnancy ? 1 : 0;
   }
 
   public function getUser() {
@@ -32,7 +32,7 @@ class PregnancyModel {
   public function getJsonSerialized() {
     return [
       'weeks' => $this->weeks,
-      'risk-pregnant' => $this->riskPregnant,
+      'risk-pregnant' => $this->riskPregnancy,
       'user' => $this->user->getJsonSerialized()
     ];
   }

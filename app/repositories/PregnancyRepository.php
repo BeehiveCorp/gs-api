@@ -18,14 +18,14 @@ class PregnancyRepository {
   }
 
   static function insert(PregnancyModel $pregnancy): bool {
-    $sql = 'INSERT INTO ' . self::$table . ' (user_id, weeks, risk_pregnant) VALUES (?, ?, ?)';
+    $sql = 'INSERT INTO ' . self::$table . ' (user_id, weeks, risk_pregnancy) VALUES (?, ?, ?)';
 
     $stmt = self::$pdoConn->prepare($sql);
 
     $stmt->execute([
       $pregnancy->getUser()->getId(),
       $pregnancy->getWeeks(),
-      $pregnancy->isRiskPregnant(),
+      $pregnancy->isRiskPregnancy(),
     ]);
 
     return $stmt->rowCount() > 0;
