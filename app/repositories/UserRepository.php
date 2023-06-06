@@ -17,7 +17,7 @@ class UserRepository {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  static function insert(UserModel $user): bool {
+  static function insert(UserModel $user) {
     $sql = 'INSERT INTO ' . self::$table . ' (name, email, gender, weight, height, password, birth_date, avatar)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     
