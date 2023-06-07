@@ -4,8 +4,8 @@ class StoreRepository {
   static private $pdoConn = null;
   static private $table = "STORES";
 
-  function __construct(Database $database) {
-    self::$pdoConn = $database->getConnection();
+  function __construct(PDO $connection) {
+    self::$pdoConn = $connection;
   }
 
   static function all() {

@@ -11,7 +11,15 @@ class DependentController {
     $this->DependentRepository = new DependentRepository($connection);
   }
 
-  public function getAll() {
+  public function getAll(Request $request) {
+    $params = $request->params;
+
+    if (isset($params)) {
+      $userId = $params->userId;
+      $allByUser = $this->DependentRepository::where('user_id = ' . "'{$userId}'");
+      ResponseHandler::success(200, $allByUser);
+    }
+
     $all = $this->DependentRepository::all();
     ResponseHandler::success(200, $all);
   }
@@ -26,7 +34,7 @@ class DependentController {
     if (!$wasInserted) {
       ResponseHandler::error(422, "Algo deu errado.");
     }
-    
+
     ResponseHandler::success(201);
 }
 

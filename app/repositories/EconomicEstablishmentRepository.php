@@ -4,8 +4,8 @@ class EconomicEstablishmentRepository {
   static private $pdoConn = null;
   static private $table = "ECONOMIC_ESTABLISHMENTS";
 
-  function __construct(Database $database) {
-    self::$pdoConn = $database->getConnection();
+  function __construct(PDO $connection) {
+    self::$pdoConn = $connection;
   }
 
   static function all() {

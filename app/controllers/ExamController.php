@@ -8,11 +8,11 @@ class ExamController {
   
   function __construct() {
     $database = new Database("database", "nutriaapp", "root", "nutriaapp");
-    $database->getConnection();
+    $connection = $database->getConnection();
 
-    $this->ExamRepository = new ExamRepository($database);
-    $this->ExamNutrientRepository = new ExamNutrientRepository($database);
-    $this->NutrientRepository = new NutrientRepository($database);
+    $this->ExamRepository = new ExamRepository($connection);
+    $this->ExamNutrientRepository = new ExamNutrientRepository($connection);
+    $this->NutrientRepository = new NutrientRepository($connection);
   }
 
   public function getAllByUserId($userId) {

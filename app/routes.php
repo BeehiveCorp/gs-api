@@ -22,3 +22,6 @@ $router->get('/pregnancies/insert', [$PregnancyController, 'createPregnancy']);
 $router->get('/exams/all', [$ExamController, 'getAll']);
 $router->post('/exams/insert', [$ExamController, 'createExam']);
 $router->get('/exams/details', [$ExamController, 'getById']);
+
+// Product routes
+$router->post('/products/all', [$ProductController, 'getAll']);
