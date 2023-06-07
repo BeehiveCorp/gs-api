@@ -17,6 +17,20 @@ class DependentController {
   }
   //crud
 
+  public function createDependent(Request $request) {
+    $body = $request->body;
+
+    $dependent = new DependentModel($body);
+
+    $wasInserted = $this->DependentRepository::insert($dependent);
+
+    if (!$wasInserted) {
+        ResponseHandler::error(422, "Algo deu errado.");
+    }
+    ResponseHandler::success(201);
+}
+
+
   public function updateDependent(Request $request, $id){
     $body = $request->body;
     $dependent = new DependentModel($body);

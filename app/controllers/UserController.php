@@ -30,16 +30,6 @@ class UserController {
 
     if (!$wasInserted) ResponseHandler::error(422, "Algo deu errado.");
 
-    if ($body->is_pregnant) {
-      $insertedUser = $this->UserRepository::findOneBy('email', $user->getEmail());
-  
-      $pregnancy = new PregnancyModel(null, $body->weeks, $body->risk_pregnant, $insertedUser);
-
-      $wasPregnancyInserted = $this->PregnancyRepository::insert($pregnancy);
-
-      if (!$wasPregnancyInserted) ResponseHandler::error(422, "Algo deu errado.");
-    }
-
     ResponseHandler::success(201);
   }
 

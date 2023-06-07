@@ -1,16 +1,19 @@
 <?php
 
-class PregnancyModel {
+class EconomicEstablishmentModel {
   private $id;
-  private $weeks;
-  private $riskPregnant;
-  private $user;
+  private $address;
+  private $number;
+  private $is_paid;
+  private $latitude;
+  private $longitude;
+  private $city;
 
-  function __construct(stdClass $data) {
-    $this->id = $data->id ?? null;
-    $this->weeks = $data->weeks ?? null;
-    $this->riskPregnant = $data->riskPregnant ?? null;
-    $this->user = $data->user ?? null;
+  function __construct(?string $id, string $address, bool $riskPregnant, UserModel $user) {
+    $this->id = $id;
+    $this->address = $address;
+    $this->riskPregnant = $riskPregnant;
+    $this->user = $user;
   }
 
   public function getId() {
