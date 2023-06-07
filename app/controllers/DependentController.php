@@ -15,7 +15,6 @@ class DependentController {
     $all = $this->DependentRepository::all();
     ResponseHandler::success(200, $all);
   }
-  //crud
 
   public function createDependent(Request $request) {
     $body = $request->body;
@@ -25,8 +24,9 @@ class DependentController {
     $wasInserted = $this->DependentRepository::insert($dependent);
 
     if (!$wasInserted) {
-        ResponseHandler::error(422, "Algo deu errado.");
+      ResponseHandler::error(422, "Algo deu errado.");
     }
+    
     ResponseHandler::success(201);
 }
 
@@ -38,33 +38,30 @@ class DependentController {
     $nameExist = $this->DependentRepository::findOneBy('name', $dependent->getName());
 
     if ($nameExist && $nameExist->getId() !== $id) {
-        ResponseHandler::error(400, "Dependente com o mesmo nome já existe.");
+      ResponseHandler::error(400, "Dependente com o mesmo nome já existe.");
     }
 
     $wasUpdated = $this->DependentRepository::update($id, $dependent);
 
     if (!$wasUpdated) {
-        ResponseHandler::error(422, "Não foi possível atualizar o dependente.");
+      ResponseHandler::error(422, "Não foi possível atualizar o dependente.");
     }
     ResponseHandler::success(200);
-}
+  }
 
-public function deleteDependent($id) {
-  $existingDependent = $this->DependentRepository->findById($id);
+  public function deleteDependent($id) {
+    $existingDependent = $this->DependentRepository::findOneBy('id', $id);
 
-  if (!$existingDependent) {
+    if (!$existingDependent) {
       ResponseHandler::error(404, "Dependente não encontrado.");
-  }
+    }
 
-  $wasDeleted = $this->DependentRepository->delete($id);
+    $wasDeleted = $this->DependentRepository->delete($id);
 
-  if (!$wasDeleted) {
+    if (!$wasDeleted) {
       ResponseHandler::error(500, "Não foi possível excluir o dependente.");
+    }
+
+    ResponseHandler::success(200);
   }
-
-  ResponseHandler::success(200);
-}
-
-
-
 }
