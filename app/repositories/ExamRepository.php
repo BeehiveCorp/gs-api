@@ -18,7 +18,7 @@ class ExamRepository {
   }
 
   static function insert(ExamModel $exam) {
-    $sql = 'INSERT INTO ' . self::$table . ' (dependent_id, user_id, exam_date, exam_local)
+    $sql = 'INSERT INTO ' . self::$table . ' (dependent_id, user_id, date, local)
       VALUES (?, ?, ?, ?)';
     
     $stmt = self::$pdoConn->prepare($sql);
@@ -26,15 +26,15 @@ class ExamRepository {
     $stmt->execute([
       $exam->getDependentId(),
       $exam->getUserId(),
-      $exam->getExamDate(),
-      $exam->getExamLocal(),
+      $exam->getDate(),
+      $exam->getLocal(),
     ]);
 
     return $stmt->rowCount() > 0;
   }
 
   public static function where($conditions): array {
-    $sql = 'SELECT * FROM ' . self::$table . ' WHERE ' . $conditions;
+    $sql = 'SELECT * FROM ' . self::$table . ' WHERE ' . $conditions . 'ORDER BY date DESC';
     $stmt = self::$pdoConn->prepare($sql);
       
     $stmt->execute();

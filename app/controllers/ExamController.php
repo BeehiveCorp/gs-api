@@ -29,10 +29,10 @@ class ExamController {
 
 
   public function getAll(Request $request) {
-    $params = $request->params;
+    $id = $request->params;
 
-    if ($params) {
-      $this->getAllById($params);
+    if ($id) {
+      $this->getAllById($id);
       return;
     }
 
