@@ -1,8 +1,8 @@
 <?php
 
-class ExamRepository {
+class ExamNutrientRepository {
   static private $pdoConn = null;
-  static private $table = "EXAMS";
+  static private $table = "EXAM_NUTRIENTS";
 
   function __construct(Database $database) {
     self::$pdoConn = $database->getConnection();
@@ -17,24 +17,23 @@ class ExamRepository {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  static function insert(ExamModel $exam) {
-    $sql = 'INSERT INTO ' . self::$table . ' (dependent_id, user_id, date, local)
-      VALUES (?, ?, ?, ?)';
+  static function insert(ExamNutrientModel $examNutrient) {
+    $sql = 'INSERT INTO ' . self::$table . ' (nutrient_id, exam_id, result)
+      VALUES (?, ?, ?)';
     
     $stmt = self::$pdoConn->prepare($sql);
 
     $stmt->execute([
-      $exam->getDependentId(),
-      $exam->getUserId(),
-      $exam->getDate(),
-      $exam->getLocal(),
+      $examNutrient->getNutrientId(),
+      $examNutrient->getExamId(),
+      $examNutrient->getResult(),
     ]);
 
     return $stmt->rowCount() > 0 ? self::$pdoConn->lastInsertId() : false;
   }
 
   public static function where($conditions): array {
-    $sql = 'SELECT * FROM ' . self::$table . ' WHERE ' . $conditions . 'ORDER BY date DESC';
+    $sql = 'SELECT * FROM ' . self::$table . ' WHERE ' . $conditions;
     $stmt = self::$pdoConn->prepare($sql);
       
     $stmt->execute();

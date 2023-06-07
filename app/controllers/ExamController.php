@@ -3,12 +3,16 @@
 class ExamController {
 
   private $ExamRepository;
-
+  private $ExamNutrientRepository;
+  private $NutrientRepository;
+  
   function __construct() {
     $database = new Database("database", "nutriaapp", "root", "nutriaapp");
     $database->getConnection();
 
     $this->ExamRepository = new ExamRepository($database);
+    $this->ExamNutrientRepository = new ExamNutrientRepository($database);
+    $this->NutrientRepository = new NutrientRepository($database);
   }
 
   public function getAllByUserId($userId) {
@@ -45,10 +49,27 @@ class ExamController {
 
     $exam = new ExamModel($body);
 
-    $wasInserted = $this->ExamRepository::insert($exam);
+    $insertedExamId = $this->ExamRepository::insert($exam);
 
-    if (!$wasInserted) {
+    if (!$insertedExamId) {
       ResponseHandler::error(422, "Algo deu errado.");
+    }
+
+    $nutrients = $body->nutrients;
+
+    foreach($nutrients as $n) {
+      $nutrient = $this->NutrientRepository::findOneBy('symbol', $n->symbol);
+      $nutrientId = $nutrient->getId();
+
+      if ($nutrientId !== null) {
+        $examNutrient = new ExamNutrientModel([
+          "exam_id" => intval($insertedExamId),
+          "nutrient_id" => $nutrientId,
+          "result" => $n->result
+        ]);
+
+        $this->ExamNutrientRepository::insert($examNutrient);
+      }
     }
 
     ResponseHandler::success(201);
