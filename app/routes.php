@@ -26,3 +26,7 @@ $router->get('/exams/details', [$ExamController, 'getById']);
 // Product routes
 $router->post('/products/all', [$ProductController, 'getAll']);
 $router->get('/products/store', [$ProductController, 'getByStore']);
+
+// Store routes
+$router->get('/stores/all', [$StoreController, 'getAll']);
+$router->get('/stores/details', [$StoreController, 'getById']);
