@@ -18,11 +18,13 @@ class DependentRepository {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  static function insert(DependentModel $dependent): bool {
-    $sql = 'INSERT INTO ' . self::$table . ' (name, gender, weight, height,  birth_date, avatar)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    
+  static function insert(DependentModel $dependent) {
+    $sql = 'INSERT INTO ' . self::$table . ' (name, gender, weight, height, birth_date, avatar)
+      VALUES (?, ?, ?, ?, ?, ?)';
+  
     $stmt = self::$pdoConn->prepare($sql);
+  
+    echo "foi";
 
     $stmt->execute([
       $dependent->getName(),
@@ -33,8 +35,11 @@ class DependentRepository {
       $dependent->getAvatar()
     ]);
 
+    echo "foi dps do execute";
+  
     return $stmt->rowCount() > 0;
   }
+  
 
   public static function findOneBy($column, $condition): ?DependentModel {
     $sql = 'SELECT * FROM ' . self::$table . ' WHERE ' . $column . ' = ' . "'{$condition}'";

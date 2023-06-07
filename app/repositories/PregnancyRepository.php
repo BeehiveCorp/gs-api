@@ -23,7 +23,7 @@ class PregnancyRepository {
     $stmt = self::$pdoConn->prepare($sql);
 
     $stmt->execute([
-      $pregnancy->getUser()->getId(),
+      $pregnancy->getId(),
       $pregnancy->getWeeks(),
       $pregnancy->isRiskPregnancy(),
     ]);

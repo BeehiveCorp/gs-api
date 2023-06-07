@@ -8,12 +8,19 @@ $router->post('/users/create', [$UserController, 'create']);
 $router->post('/users/login', [$UserController, 'login']);
 $router->get('/users/checkUserExistence', [$UserController, 'checkUserExistence']);
 
-
+// Dependents routes
+$router->post('/dependents/insert', [$DependentController, 'createDependent']);
 $router->get('/dependents/all', [$DependentController, 'getAll']);
+$router->put('/dependents/update', [$DependentController, 'updateDependent']);
+$router->delete('/dependents/delete', [$DependentController, 'deleteDependent']);
 
-// $router->get('/pregnancies', [$PregnanciesController, 'getAll']);
 
-// $router->get('/exams', [$ExamsController, 'getAll']);
+$router->get('/pregnancies/all', [$PregnancyController, 'getAll']);
+$router->get('/pregnancies/insert', [$PregnancyController, 'createPregnancy']);
+
+
+$router->get('/exams/all', [$ExamController, 'getAll']);
+$router->post('/exams/insert', [$ExamController, 'createExam']);
 
 // $router->get('/stores', [$StoresController, 'getAll']);
 
