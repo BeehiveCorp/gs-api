@@ -21,7 +21,7 @@ class ExamController {
     ResponseHandler::success(200, $exams);
   }
 
-  public function getAllById($params) {
+  public function getAllByUserOrDependentId($params) {
     if (isset($params->userId)) $this->getAllByUserId($params->userId);
     else if (isset($params->dependentId)) $this->getAllByDependentId($params->dependentId);
     else ResponseHandler::error(404, "Query param não esperada");
@@ -32,7 +32,7 @@ class ExamController {
     $id = $request->params;
 
     if ($id) {
-      $this->getAllById($id);
+      $this->getAllByUserOrDependentId($id);
       return;
     }
 
@@ -52,5 +52,39 @@ class ExamController {
     }
 
     ResponseHandler::success(201);
+  }
+
+  public function getById(Request $request) {
+    $sql = 'SELECT date, local, name, description, symbol, result FROM EXAMS e
+              INNER JOIN EXAM_NUTRIENTS en
+              ON e.id = en.exam_id
+                  INNER JOIN NUTRIENTS n
+                  ON en.nutrient_id = n.id';
+
+    $results = $this->ExamRepository::sql($sql);
+
+    if (count($results) === 0) {
+      ResponseHandler::error(404, "Nada encontrado");
+    }
+
+    $examDate = $results[0]["date"];
+    $examLocal = $results[0]["local"];
+
+    $examNutrientsResults = [];
+
+    foreach ($results as $result) {
+      $examNutrientsResults[] = [
+        "name" => $result["name"],
+        "description" => $result["description"],
+        "symbol" => $result["symbol"],
+        "result" => $result["result"],
+      ];
+    }
+
+    ResponseHandler::success(200, [
+      "date" => $examDate,
+      "local" => $examLocal,
+      "nutrients" => $examNutrientsResults
+    ]);
   }
 }

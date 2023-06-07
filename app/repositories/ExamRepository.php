@@ -41,4 +41,13 @@ class ExamRepository {
   
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  
+  public static function sql($query): array {
+    $stmt = self::$pdoConn->prepare($query);
+      
+    $stmt->execute();
+  
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
