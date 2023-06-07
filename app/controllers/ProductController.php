@@ -25,4 +25,12 @@ class ProductController {
     $all = $this->ProductRepository::sql($sql);
     ResponseHandler::success(200, $all);
   }
+
+  public function getByStore(Request $request) {
+    $params = $request->params;
+    $storeId = $params->id;
+
+    $all = $this->ProductRepository::where('store_id = ' . "'$storeId'");
+    ResponseHandler::success(200, $all);
+  }
 }
