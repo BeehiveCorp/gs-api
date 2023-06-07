@@ -12,7 +12,7 @@ class DependentModel {
   
   function __construct(stdClass $data) {
     $this->id = $data->id ?? null;
-    $this->user_id = $data->id ?? null;
+    $this->user_id = $data->user_id ?? null;
     $this->name = $data->name ?? null;
     $this->birth_date = $data->birth_date ?? null;
     $this->gender = $data->gender ?? null;
@@ -23,6 +23,9 @@ class DependentModel {
 
   public function getId() {
     return $this->id;
+  }
+  public function getUserId() {
+    return $this->user_id;
   }
 
   public function getName() {

@@ -19,14 +19,13 @@ class DependentRepository {
   }
 
   static function insert(DependentModel $dependent) {
-    $sql = 'INSERT INTO ' . self::$table . ' (name, gender, weight, height, birth_date, avatar)
-      VALUES (?, ?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO ' . self::$table . ' (user_id, name, gender, weight, height, birth_date, avatar)
+      VALUES (?, ?, ?, ?, ?, ?, ?)';
   
     $stmt = self::$pdoConn->prepare($sql);
   
-    echo "foi";
-
     $stmt->execute([
+      $dependent->getUserId(),
       $dependent->getName(),
       $dependent->getGender(),
       $dependent->getWeight(),
@@ -34,8 +33,6 @@ class DependentRepository {
       $dependent->getBirthDate(),
       $dependent->getAvatar()
     ]);
-
-    echo "foi dps do execute";
   
     return $stmt->rowCount() > 0;
   }
