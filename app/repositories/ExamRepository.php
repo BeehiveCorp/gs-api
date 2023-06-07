@@ -16,4 +16,20 @@ class ExamRepository {
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  static function insert(ExamModel $exam) {
+    $sql = 'INSERT INTO ' . self::$table . ' (dependent_id, user_id, exam_date, exam_local)
+      VALUES (?, ?, ?, ?)';
+    
+    $stmt = self::$pdoConn->prepare($sql);
+
+    $stmt->execute([
+      $exam->getDependentId(),
+      $exam->getUserId(),
+      $exam->getExamDate(),
+      $exam->getExamLocal(),
+    ]);
+
+    return $stmt->rowCount() > 0;
+  }
 }
