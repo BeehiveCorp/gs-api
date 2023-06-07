@@ -32,4 +32,13 @@ class ExamRepository {
 
     return $stmt->rowCount() > 0;
   }
+
+  public static function where($conditions): array {
+    $sql = 'SELECT * FROM ' . self::$table . ' WHERE ' . $conditions;
+    $stmt = self::$pdoConn->prepare($sql);
+      
+    $stmt->execute();
+  
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

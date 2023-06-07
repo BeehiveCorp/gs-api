@@ -11,7 +11,31 @@ class ExamController {
     $this->ExamRepository = new ExamRepository($database);
   }
 
-  public function getAll() {
+  public function getAllByUserId($userId) {
+    $exams = $this->ExamRepository::where('user_id = ' . "'$userId'");
+    ResponseHandler::success(200, $exams);
+  }
+
+  public function getAllByDependentId($dependentId) {
+    $exams = $this->ExamRepository::where('dependent_id = ' . "'$dependentId'");
+    ResponseHandler::success(200, $exams);
+  }
+
+  public function getAllById($params) {
+    if (isset($params->userId)) $this->getAllByUserId($params->userId);
+    else if (isset($params->dependentId)) $this->getAllByDependentId($params->dependentId);
+    else ResponseHandler::error(404, "Query param não esperada");
+  }
+
+
+  public function getAll(Request $request) {
+    $params = $request->params;
+
+    if ($params) {
+      $this->getAllById($params);
+      return;
+    }
+
     $all = $this->ExamRepository::all();
     ResponseHandler::success(200, $all);
   }
@@ -24,9 +48,9 @@ class ExamController {
     $wasInserted = $this->ExamRepository::insert($exam);
 
     if (!$wasInserted) {
-        ResponseHandler::error(422, "Algo deu errado.");
+      ResponseHandler::error(422, "Algo deu errado.");
     }
-    ResponseHandler::success(201);
-}
 
+    ResponseHandler::success(201);
+  }
 }
