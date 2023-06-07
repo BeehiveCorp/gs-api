@@ -55,7 +55,7 @@ class ExamController {
   }
 
   public function getById(Request $request) {
-    $sql = 'SELECT date, local, name, description, symbol, result FROM EXAMS e
+    $sql = 'SELECT n.id, date, local, name, description, symbol, result FROM EXAMS e
                 INNER JOIN EXAM_NUTRIENTS en
                 ON e.id = en.exam_id
                     INNER JOIN NUTRIENTS n
@@ -75,6 +75,7 @@ class ExamController {
 
     foreach ($results as $result) {
       $examNutrientsResults[] = [
+        "id" => $result["id"],
         "name" => $result["name"],
         "description" => $result["description"],
         "symbol" => $result["symbol"],
