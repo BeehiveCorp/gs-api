@@ -56,10 +56,11 @@ class ExamController {
 
   public function getById(Request $request) {
     $sql = 'SELECT date, local, name, description, symbol, result FROM EXAMS e
-              INNER JOIN EXAM_NUTRIENTS en
-              ON e.id = en.exam_id
-                  INNER JOIN NUTRIENTS n
-                  ON en.nutrient_id = n.id';
+                INNER JOIN EXAM_NUTRIENTS en
+                ON e.id = en.exam_id
+                    INNER JOIN NUTRIENTS n
+                    ON en.nutrient_id = n.id
+                        WHERE e.id = ' . $request->params->id;
 
     $results = $this->ExamRepository::sql($sql);
 
