@@ -15,7 +15,7 @@ $router->delete('/dependents/delete', [$DependentController, 'deleteDependent'])
 
 
 $router->get('/pregnancies/all', [$PregnancyController, 'getAll']);
-$router->get('/pregnancies/insert', [$PregnancyController, 'createPregnancy']);
+$router->post('/pregnancies/insert', [$PregnancyController, 'createPregnancy']);
 
 
 $router->get('/exams/all', [$ExamController, 'getAll']);
@@ -23,7 +23,8 @@ $router->post('/exams/insert', [$ExamController, 'createExam']);
 
 // $router->get('/stores', [$StoresController, 'getAll']);
 
-// $router->get('/exam_nutrients', [$Exam_nutrientsController, 'getAll']);
+$router->get('/exam_nutrients/all', [$ExamNutrientController, 'getAll']);
+$router->post('/exam_nutrients/insert', [$ExamNutrientController, 'createExamNutrient']);
 
 // $router->get('/nutrients', [$NutrientsController, 'getAll']);
 

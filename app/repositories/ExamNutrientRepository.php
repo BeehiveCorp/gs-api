@@ -16,4 +16,19 @@ class ExamNutrientRepository {
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  static function insert(ExamNutrientsModel $examN) {
+    $sql = 'INSERT INTO ' . self::$table . ' (exam_id, nutrient_id, result)
+      VALUES (?, ?, ?)';
+    
+    $stmt = self::$pdoConn->prepare($sql);
+
+    $stmt->execute([
+      $examN->getExamId(),
+      $examN->getNutrientId(),
+      $examN->getResult(),
+    ]);
+
+    return $stmt->rowCount() > 0;
+  }
 }
