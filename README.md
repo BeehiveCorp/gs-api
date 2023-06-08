@@ -29,7 +29,7 @@
 
 ### 🤳 Sobre
 
-O NutriA chega ao mercado como um aplicativo que une o uso de dados pessoais e laboratoriais, parcerias com empresas, instituições, organizações e inteligência artificial, visando ser um importante aliado no combate à subnutrição/desnutrição que assola o Brasil e o mundo.
+O Nutria chega ao mercado como um aplicativo que une o uso de dados pessoais e laboratoriais, parcerias com empresas, instituições, organizações e inteligência artificial, visando ser um importante aliado no combate à subnutrição/desnutrição que assola o Brasil e o mundo.
 
 O aplicativo será responsável por fornecer uma ficha de nutrição que será desenvolvida através de inteligência artificial treinada para identificar carências em nutrientes através do cruzamentos de dados de resultados de exames laboratoriais, histórico médico e características demográficas, para então identificar usuários que possam estar ou já estão em situação de vulnerabilidade nutricional e possibilitar a sugestão de quais alimentos devem ser consumidos para auxiliar a suprir essa carência através da alimentação.
 
@@ -70,6 +70,8 @@ $ git clone https://github.com/BeehiveCorp/nutria-api.git
 
 $ docker-compose up -d
 ```
+
+<br>
 
 **Containers e funcionamento:**
 <br>
