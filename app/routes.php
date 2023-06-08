@@ -16,7 +16,7 @@ $router->delete('/dependents/delete', [$DependentController, 'deleteDependent'])
 
 // Pregnancy routes
 $router->get('/pregnancies/all', [$PregnancyController, 'getAll']);
-$router->get('/pregnancies/insert', [$PregnancyController, 'createPregnancy']);
+$router->post('/pregnancies/insert', [$PregnancyController, 'createPregnancy']);
 
 // Exam routes
 $router->get('/exams/all', [$ExamController, 'getAll']);
