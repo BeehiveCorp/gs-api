@@ -14,6 +14,8 @@
   <a href="#-Funcionalidades">Funcionalidades</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-Como-usar">Como usar</a>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-Colaboradores">Colaboradores</a>
 </p>
 
 <p align="center">
@@ -76,4 +78,16 @@ $ docker-compose up -d
 
 - **mysql:** containeriza o banco de dados, que hoje é a versão mais recente do mysql.
 
-- **php-nginx:** a imagem utilizada oferece um ambiente de desenvolvimento com o Nginx como webserver e a versão mais recente do PHP como linguagem de programação. Deve ser acessível na porta 3000
+- **php-nginx:** a imagem utilizada oferece um ambiente de desenvolvimento com o Nginx como webserver e a versão mais recente do PHP como linguagem de programação. Deve ser acessível na porta 3000.
+
+**Obs:** O projeto não possui Dockerfile já que estamos orquestrando imagens com o docker-compose. Sobre o processo de containerização, a única dificuldade foi em encontrar imagens php com nginx que rodassem em Windows e MacOS.
+
+<br>
+
+### 🧑‍💻 Colaboradores
+
+- [David Almeida Santos](https://www.linkedin.com/in/almeida154/) (RM96033)
+- [Eduardo Juhn Shimizu](https://www.linkedin.com/in/eduardo-shimizu/) (RM93199)
+- [Isabella Venancio Bazzi](https://www.linkedin.com/in/isabellabazzi/) (RM93545)
+- Lina Maria Fazia Teixeira (RM94303)
+- [Vylle da Silva Menezes](https://www.linkedin.com/in/vylle-menezes/) (RM96097)
