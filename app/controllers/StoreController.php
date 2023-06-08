@@ -22,4 +22,21 @@ class StoreController {
     $store = $this->StoreRepository::where('id = ' . "'{$id}'");
     ResponseHandler::success(200, $store[0]);
   }
+
+  public function login(Request $request) {
+    $body = $request->body;
+
+    $email = $body->email;
+    $password = $body->password;
+
+    $queryCondition = 'email = ' . "'$email'" . 'AND' . ' password = ' . "'$password'";
+    $users = $this->StoreRepository::where($queryCondition);
+
+    if (isset($users[0])) {
+      ResponseHandler::success(200, $users[0]);
+    }
+
+    ResponseHandler::error(404, "Loja não encontrada");
+  }
+
 }

@@ -11,6 +11,10 @@ class ResponseHandler {
       ]
     ];
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+    header("Access-Control-Max-Age", 3600);
     echo json_encode($errorResponse);
     exit;
   }
@@ -19,6 +23,10 @@ class ResponseHandler {
     // sleep(1);
     http_response_code($statusCode);
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+    header("Access-Control-Max-Age", 3600);
     echo json_encode($data);
     exit;
   }

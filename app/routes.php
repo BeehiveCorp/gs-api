@@ -30,3 +30,4 @@ $router->get('/products/store', [$ProductController, 'getByStore']);
 // Store routes
 $router->get('/stores/all', [$StoreController, 'getAll']);
 $router->get('/stores/details', [$StoreController, 'getById']);
+$router->post('/stores/login', [$StoreController, 'login']);
