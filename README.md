@@ -77,13 +77,3 @@ $ docker-compose up -d
 - **mysql:** containeriza o banco de dados, que hoje é a versão mais recente do mysql.
 
 - **php-nginx:** a imagem utilizada oferece um ambiente de desenvolvimento com o Nginx como webserver e a versão mais recente do PHP como linguagem de programação. Deve ser acessível na porta 3000
-
-<br>
-
-**Você também pode optar pela versão no DockerHub:**
-
-```bash
-# Baixe a imagem
-
-$ docker pull almeida154/nutria-api
-```
